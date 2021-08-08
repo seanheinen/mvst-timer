@@ -1,0 +1,14 @@
+header {
+  display: flex;
+
+  div {
+    flex: 1;
+    padding: 1em;
+    align-items: center;
+
+    &:nth-child(2) {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
