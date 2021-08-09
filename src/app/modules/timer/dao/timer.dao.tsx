@@ -7,7 +7,8 @@ class _TimerDao {
 
   private static instance: _TimerDao;
 
-  private readonly endpoint = 'http://localhost:3001/timer';
+  // Make configurable
+  private readonly endpoint = 'https://mvst-api.herokuapp.com/timer';
 
   private constructor() { }
 

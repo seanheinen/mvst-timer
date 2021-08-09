@@ -2,7 +2,7 @@ const http = require('http'),
   fs = require('fs'),
   path = require('path');
 
-const port = 3000,
+const port = process.env.PORT || 3001,
   appRoot = __dirname + "/www",
   appPath = appRoot + "/index.html"
 
