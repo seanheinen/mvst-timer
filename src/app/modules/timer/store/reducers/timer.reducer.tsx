@@ -8,7 +8,7 @@ const initialState: TimerSlice = {
 
 export const timerReducer = createReducer(initialState, (builder) => {
 
-  builder.addCase(TimerAction.success, (_0, action) => ({
+  builder.addCase(TimerAction.set, (_0, action) => ({
     totalMs: action.payload
   }));
 

@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import { HeaderComponent } from '../header/header.component';
 import { Theme } from 'app/models';
 import { ROOT, rootReducer, RootSelector } from 'app/store';
+import { ThemeProvider } from '@material-ui/core';
+import { MuiTheme } from 'app/themes';
 
 // Initialise root slice
 StoreService.addFeatureSlice({
@@ -21,32 +23,39 @@ modules.forEach((module) => {
 
 export const App: React.FunctionComponent = () => {
 
-  // Subscribe to redux root slice
+  // Subscribe to redux theme root slice
   const theme = useSelector(RootSelector.getTheme);
-  
+  const matTheme = theme === Theme.Dark ? MuiTheme.Dark : MuiTheme.Light;
+
   return (
 
-    <div className={`mvst-app theme-${theme === Theme.Dark ? 'dark' : 'light'}`}>
+    // Make copy of theme as workaround to following issue
+    // https://stackoverflow.com/questions/60909608/material-ui-theme-does-not-change-back
+    <ThemeProvider theme={{ ...matTheme }}>
 
-      <HeaderComponent></HeaderComponent>
+      <div className={`mvst-app theme-${theme === Theme.Dark ? 'dark' : 'light'}`}>
 
-      <BrowserRouter>
-        <Switch>
+        <HeaderComponent></HeaderComponent>
 
-          {/* Default path is /timer */}
-          <Route exact path="/">
-            <Redirect to="/timer" />
-          </Route>
+        <BrowserRouter>
+          <Switch>
 
-          {/* Load modules dynamically */}
-          {modules.map((module, index) => {
-            return <Route exact {...module.routeProps} key={index}></Route>;
-          })}
+            {/* Default path is /timer */}
+            <Route exact path="/">
+              <Redirect to="/timer" />
+            </Route>
 
-        </Switch>
-      </BrowserRouter>
+            {/* Load modules dynamically */}
+            {modules.map((module, index) => {
+              return <Route exact {...module.routeProps} key={index}></Route>;
+            })}
 
-    </div>
+          </Switch>
+        </BrowserRouter>
+
+      </div>
+
+    </ThemeProvider>
 
   )
 

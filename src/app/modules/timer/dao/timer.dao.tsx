@@ -1,10 +1,13 @@
 import { Observable } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
+import { ajax, AjaxResponse } from 'rxjs/ajax';
 import { delay, map } from 'rxjs/operators';
 import { TotalMsDto } from './dtos';
 
 class _TimerDao {
+
   private static instance: _TimerDao;
+
+  private readonly endpoint = 'http://localhost:3001/timer';
 
   private constructor() { }
 
@@ -13,27 +16,24 @@ class _TimerDao {
   }
 
   getTotalMs(): Observable<TotalMsDto> {
-    return ajax('http://google.com').pipe(
-      delay(2000),
-      map((data) => {
-        console.log(data);
-        return {
-          totalMs: 3500 * 1000
-        }
-      })
+    return ajax<TotalMsDto>(`${this.endpoint}`).pipe(
+      map(this.handleAjaxResponse.bind(this))
     )
   }
 
-  updateTotalMs(ms: number) {
-    return ajax('http://google.com').pipe(
-      delay(2000),
-      map((data) => {
-        console.log(data);
-        return {
-          totalMs: 3500 * 1000 + ms
-        }
-      })
+  updateTotalMs(totalMs: number): Observable<TotalMsDto> {
+    return ajax.put<TotalMsDto>(`${this.endpoint}`, {
+      totalMs
+    }).pipe(
+      map(this.handleAjaxResponse.bind(this))
     )
+  }
+
+  private handleAjaxResponse<T>(ajaxResponse: AjaxResponse<T>): T {
+    if (ajaxResponse.status >= 200 && ajaxResponse.status < 300) {
+      return ajaxResponse.response;
+    }
+    throw ajaxResponse.response;;
   }
 
 }

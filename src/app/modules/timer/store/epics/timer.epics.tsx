@@ -9,15 +9,23 @@ export const getTotalMsEpic: Epic = (action$) => action$.pipe(
   // ofType(TimerAction.update.match),
   filter(TimerAction.get.match),
   mergeMap(() => TimerDao.getTotalMs().pipe(
-    map((response) => TimerAction.success(response.totalMs)),
-    catchError(() => EMPTY) // Swallow error
+    map((response) => TimerAction.set(response.totalMs)),
+    catchError((error) => {
+      console.error(error);
+      // Swallow error
+      return EMPTY;
+    })
   )),
 );
 
 export const setTotalMsEpic: Epic = (action$) => action$.pipe(
   filter(TimerAction.update.match),
   mergeMap((action) => TimerDao.updateTotalMs(action.payload).pipe(
-    map((response) => TimerAction.success(response.totalMs)),
-    catchError(() => EMPTY)
+    map((response) => TimerAction.set(response.totalMs)),
+    catchError((error) => {
+      console.error(error);
+      // Swallow error
+      return EMPTY;
+    })
   )),
 );

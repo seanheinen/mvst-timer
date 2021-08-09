@@ -17,10 +17,10 @@ body {
   display: flex;
   flex-direction: column;
   &.theme-dark {
-    background-color: silver;
+    background-color: #373838;
   }
   &.theme-light {
-    background-color: pink;
+    background-color: white;
   }
 }
 

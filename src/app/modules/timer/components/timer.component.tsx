@@ -1,7 +1,7 @@
 import './timer.component.scss';
 import React from 'react';
+import * as Mat from '@material-ui/core';
 import * as Icon from '@material-ui/icons';
-import * as UI from 'app/ui';
 import { Subscription, timer } from 'rxjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { TimerAction, TimerSelector } from '../store';
@@ -72,15 +72,14 @@ export const TimerComponent: React.FunctionComponent = () => {
   return (
     <div className="timer-container">
 
-      {formatTime(totalMs)}
-      <UI.Button variant="contained" color="primary" onClick={clickTimer}>
-        {
-          state.subscription === undefined
-            ? <Icon.PlayArrow />
-            : <Icon.Stop />
-        }
+      <Mat.Typography variant='h3' style={{ fontWeight: 'bold', marginBottom: '1em' }}>{formatTime(totalMs)}</Mat.Typography>
+      <Mat.Button variant="contained" onClick={clickTimer} startIcon={
+        state.subscription === undefined
+          ? <Icon.PlayArrow />
+          : <Icon.Stop />
+      }>
         {formatTime(state.currentTimeMs)}
-      </UI.Button>
+      </Mat.Button>
 
     </div>
   );
