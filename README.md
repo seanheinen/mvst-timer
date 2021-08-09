@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Timer App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app serves as an accumulative timer for multiple browser users.
+
+The app is containerised using Docker and hosted in Heroku. Click [here](https://mvst-timer.herokuapp.com) to view live app.
+
+For project specification, see [this](https://www.notion.so/Timer-Code-challenge-9e8a470a0fd54a80aee2228ddab08a2e).
 
 ## Available Scripts
 
@@ -29,18 +33,26 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+# Outstanding
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Unfortunately I didn't get around to writing any unit tests. Had I had more time I would have made sure to at least add coverage for the following:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. StoreService
+2. All Redux reducers
+3. All Redux selectors
+4. All Redux epics
+5. Dao's
+6. TimerComponent
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+I generally don't write tests for components unless they're exptremely complex.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Feedback
 
-## Learn More
+The project took slightly longer than I'd anticipated. I wasn't too bothered about the extra time spent though since it allowed to get back into the swing of things.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+I took the opportunity to also learnand master: 
+- Redux for state management
+- Material UI and it's themes
+- React hooks
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Thanks for the opportunity!
